@@ -1,0 +1,14 @@
+{
+  "name": "exp-crud-fs",
+  "version": "1.0.0",
+  "description": "Express application that uses JSON file read/write to expose JSON data as a CRUD API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thomas Creamer",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
