@@ -1,9 +1,15 @@
+var bodyParser = require('body-parser');
 let express = require('express');
-let path = require('path');
 let http = require('http');
-let fs = require('fs');
+let path = require('path');
+
+let API =  require('./API');
 
 let app = express();
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -11,16 +17,25 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 app.get('/', (req, res) => {
-  let data = {};
-  fs.readFile('data.json', 'utf8', (err, result) => {
-    if (err) {
-      console.log(err);
-       res.render('index.ejs', {data: "no data"});
+  API.GET()
+  .then(result => {
+    if (result) {
+      res.render('index.ejs', {data: JSON.parse(result)});
     } else {
-      data = JSON.stringify(result);
-      res.render('index.ejs', {data: data});
+      res.render('index.ejs', {data: "no data"});
     }
   })
+  .catch(err => console.log(err));
+});
+
+app.post('/api/post', (req, res) => {
+  API.POST(req.body.itemInput)
+  .then(() => res.redirect('/'))
+});
+
+app.get('/api/delete/:id', (req, res) => {
+  API.DELETE(req.params.id)
+  .then(() => res.redirect('/'))
 });
 
 http.createServer(app)
