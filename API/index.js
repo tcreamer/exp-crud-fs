@@ -25,10 +25,19 @@ function DELETE(id) {
 
 //Get all entries from data.json file
 function GET() {
+  //initial data if data.json file does not exist
+  let initData = JSON.stringify({"items":[]});
   return new Promise((res, rej) => {
     fs.readFile('data.json', 'utf8', (err, result) => {
       if (err) {
-        rej(err);
+        fs.writeFile('data.json',initData , (err, result) => {
+          if (err) {
+            rej(err);
+          } else {
+            return;
+          }
+        });
+        res(initData);
       } else {
         res(result);
       }
