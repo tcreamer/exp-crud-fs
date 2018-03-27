@@ -12,7 +12,7 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- <link rel="stylesheet" href="css/normalize.css"> -->
-    <!-- <link rel="stylesheet" href="css/main.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
     <!--[if lte IE 9]>
@@ -20,15 +20,25 @@
         You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.
       </p>
     <![endif]-->
-    <div>
-      <p>Add Item:</p>
-      <form action="/api/post" method="POST">
-        <input type="text" name="itemInput" id="itemInput">
-        <input type="submit">
-      </form>
+    <div class="list-container">
+      <h1>To-Do List</h1>
+      <div class="list-items">
+        <div>
+          <ul>
+            <% for (item of data.items) { %>
+              <li>
+                <%= item.description %><a href="/api/delete/<%= +item.id %>"><button>x</button></a>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+        <div>
+          <form action="/api/post" method="POST">
+            <input type="text" name="itemInput" id="itemInput" autofocus>
+            <input type="submit" value="Add">
+          </form>
+        </div>
+      </div>
     </div>
-    <% for (item of data.items) { %>
-      <p><%= item.description %><a href="/api/delete/<%= +item.id %>">x</a></p>
-    <% } %>
   </body>
 </html>

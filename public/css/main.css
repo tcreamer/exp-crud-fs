@@ -1,0 +1,46 @@
+html,body {
+  width:100%;
+  height:100%;
+  font-family: sans-serif;
+}
+
+h1 {
+  background-color: #1692ff;
+  color:#fff;
+  margin: 0;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  border-bottom: 1px solid grey;
+  padding:0.5rem 0;
+}
+
+li a {
+  float: right;
+}
+
+button {
+  border-radius: 0.3rem;
+  border:none;
+  background-color: #ff6161;
+  color:white;
+  cursor:pointer;
+}
+
+.list-container {
+  border: 3px #1692ff solid;
+  margin:2rem auto;
+  width:90%;
+  max-width:450px;
+}
+
+.list-items {
+  padding:0.5rem;
+}
