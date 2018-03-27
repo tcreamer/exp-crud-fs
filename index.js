@@ -34,6 +34,11 @@ app.post('/api/post', (req, res) => {
   .then(() => res.redirect('/'))
 });
 
+app.get('/api/completed/:id', (req, res) => {
+  API.UPDATE(req.params.id)
+  .then(() => res.redirect('/'))
+});
+
 app.get('/api/delete/:id', (req, res) => {
   API.DELETE(req.params.id)
   .then(() => res.redirect('/'))

@@ -64,13 +64,34 @@ function POST(description) {
 }
 
 //Update an entry in data.json file
-function PUT(id) {
-
+function UPDATE(id) {
+  return new Promise((res, rej) => {
+    fs.readFile('data.json', 'utf8', (err, result) => {
+      if (err) {
+        rej(err);
+      } else {
+        let data = JSON.parse(result);
+        for (let i of data.items) {
+          if (i.id === Number(id)) {
+            i.status = "complete";
+          }
+        }
+        data = JSON.stringify(data);
+        fs.writeFile('data.json', data, (err, result) => {
+          if (err) {
+            rej(err);
+          } else {
+            res();
+          }
+        });
+      }
+    });
+  });
 }
 
 module.exports = {
   DELETE: DELETE,
   GET: GET,
   POST: POST,
-  PUT: PUT
+  UPDATE: UPDATE
 }

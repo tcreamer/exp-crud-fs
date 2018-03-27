@@ -22,16 +22,21 @@ li {
   padding:0.5rem 0;
 }
 
-li a {
-  float: right;
-}
-
 button {
   border-radius: 0.3rem;
   border:none;
   background-color: #ff6161;
   color:white;
   cursor:pointer;
+}
+
+button.right {
+  float:right;
+}
+
+button.complete {
+  background-color:#8bc34a;
+  float:left;
 }
 
 .list-container {

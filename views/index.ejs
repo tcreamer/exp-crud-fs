@@ -26,9 +26,18 @@
         <div>
           <ul>
             <% for (item of data.items) { %>
+              <% if (item.status === 'complete') { %>
               <li>
-                <%= item.description %><a href="/api/delete/<%= +item.id %>"><button>x</button></a>
+                <span style="text-decoration: line-through">&nbsp;<%= item.description %></span>
+                <a href="/api/delete/<%= +item.id %>"><button class="right">x</button></a>
               </li>
+              <% } else { %>
+                <li>
+                  <a href="/api/completed/<%= +item.id %>"><button class="complete">&#10004;</button></a>
+                  &nbsp;<%= item.description %>
+                  <a href="/api/delete/<%= +item.id %>"><button class="right">x</button></a>
+                </li>
+              <% } %>
             <% } %>
           </ul>
         </div>
