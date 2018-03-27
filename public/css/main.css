@@ -39,6 +39,14 @@ button.complete {
   float:left;
 }
 
+input[type="submit"] {
+  border-radius: 0.3rem;
+  border:1px solid #1692ff;
+  background-color: #1692ff;
+  color:white;
+  cursor:pointer;
+}
+
 .list-container {
   border: 3px #1692ff solid;
   margin:2rem auto;
