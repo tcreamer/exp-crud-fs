@@ -90,8 +90,8 @@ function UPDATE(id) {
 }
 
 module.exports = {
-  DELETE: DELETE,
-  GET: GET,
-  POST: POST,
-  UPDATE: UPDATE
+  DELETE,
+  GET,
+  POST,
+  UPDATE
 }

@@ -2,11 +2,8 @@ var bodyParser = require('body-parser');
 let express = require('express');
 let http = require('http');
 let path = require('path');
-
-let API =  require('./API');
-
+let routes = require('./routes');
 let app = express();
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,32 +14,13 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', (req, res) => {
-  API.GET()
-  .then(result => {
-    if (result) {
-      res.render('index.ejs', {data: JSON.parse(result)});
-    } else {
-      res.render('index.ejs', {data: "no data"});
-    }
-  })
-  .catch(err => console.log(err));
-});
+app.get('/', routes.index);
 
-app.post('/api/post', (req, res) => {
-  API.POST(req.body.itemInput)
-  .then(() => res.redirect('/'))
-});
+app.post('/api/post', routes.post);
 
-app.get('/api/completed/:id', (req, res) => {
-  API.UPDATE(req.params.id)
-  .then(() => res.redirect('/'))
-});
+app.get('/api/completed/:id', routes.completed);
 
-app.get('/api/delete/:id', (req, res) => {
-  API.DELETE(req.params.id)
-  .then(() => res.redirect('/'))
-});
+app.get('/api/delete/:id', routes.deleted);
 
 http.createServer(app)
   .listen(app.get('port'), '0.0.0.0', () => {
